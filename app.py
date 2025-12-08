@@ -28,7 +28,7 @@ with st.container():
     col1, col2 = st.columns(2)
 
     with col1:
-        age = st.slider("Age (tahun)", 18, 90, 30)
+        age = st.number_input("Age (tahun)", min_value=18, max_value=90, value=30, step=1)
         gender = st.selectbox("Gender", [0, 1], format_func=lambda x: "Perempuan" if x == 0 else "Laki-laki")
         weight = st.slider("Weight (kg)", 40, 150, 60)
         height = st.slider("Height (m)", 1.40, 2.00, 1.65)
@@ -52,3 +52,4 @@ with st.container():
 # ==========================
 st.markdown("---")
 st.caption("UI version — Model belum diterapkan")
+
