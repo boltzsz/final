@@ -39,8 +39,6 @@ with st.container():
         temperature = st.slider("Temperature (°C)", 35.0, 40.0, 36.5)
         ecg_qt = st.slider("ECG QT Interval (ms)", 300, 500, 400)
         ecg_st = st.slider("ECG ST Segment", -2.0, 2.0, 0.0)
-        predicted_disease = st.selectbox("Predicted Disease (target klasifikasi)", 
-                                         ["Disease A", "Disease B", "Disease C", "Disease D"])
 
     st.markdown("---")
 
@@ -52,4 +50,5 @@ with st.container():
 # ==========================
 st.markdown("---")
 st.caption("UI version — Model belum diterapkan")
+
 
