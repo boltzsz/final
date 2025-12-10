@@ -1,5 +1,4 @@
 import streamlit as st
-import joblib
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -80,3 +79,4 @@ with st.container():
 # ==========================
 st.markdown("---")
 st.caption("UI version — Model diterapkan dan siap digunakan.")
+
