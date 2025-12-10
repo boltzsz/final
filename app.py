@@ -1,7 +1,11 @@
 import streamlit as st
+import joblib
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
 
 # ==========================
-#  PAGE CONFIG
+# PAGE CONFIG
 # ==========================
 st.set_page_config(
     page_title="Medical Disease Predictor",
@@ -10,15 +14,15 @@ st.set_page_config(
 )
 
 # ==========================
-#  HEADER
+# HEADER
 # ==========================
 st.title("🩺 Medical Disease Prediction")
-st.write("Masukkan data pasien untuk melakukan prediksi penyakit. (UI Only)")
+st.write("Masukkan data pasien untuk melakukan prediksi penyakit.")
 
 st.markdown("---")
 
 # ==========================
-#  INPUT FORM (UI ONLY)
+# INPUT FORM (UI ONLY)
 # ==========================
 with st.container():
     st.subheader("📋 Form Input Data Pasien")
@@ -28,7 +32,7 @@ with st.container():
     col1, col2 = st.columns(2)
 
     with col1:
-        age = st.number_input("Age (tahun)", min_value=18, max_value=90, value=30, step=1)
+        age = st.slider("Age (tahun)", 18, 90, 30)
         gender = st.selectbox("Gender", [0, 1], format_func=lambda x: "Perempuan" if x == 0 else "Laki-laki")
         weight = st.slider("Weight (kg)", 40, 150, 60)
         height = st.slider("Height (m)", 1.40, 2.00, 1.65)
@@ -42,13 +46,37 @@ with st.container():
 
     st.markdown("---")
 
-    # Tombol UI saja (belum ada fungsi prediksi)
-    st.button("🔍 Predict", help="Tombol ini belum terhubung ke model.")
+    # Load the trained machine learning model
+    model = joblib.load("ab.pkl")  # Load your model file
+
+    # Prepare input data as a DataFrame
+    input_data = pd.DataFrame({
+        'age': [age],
+        'gender': [gender],
+        'weight': [weight],
+        'height': [height],
+        'heart_rate': [heart_rate],
+        'oxygen': [oxygen],
+        'temperature': [temperature],
+        'ecg_qt': [ecg_qt],
+        'ecg_st': [ecg_st]
+    })
+
+    # If you have preprocessing steps (like scaling), apply them
+    # For example, if your model needs standard scaling:
+    # scaler = joblib.load("/mnt/data/scaler.pkl")  # If you've saved a scaler model
+    # input_data_scaled = scaler.transform(input_data)  # Apply scaling
+
+    # Predict button action
+    if st.button("🔍 Predict"):
+        # Make prediction
+        prediction = model.predict(input_data)
+        
+        # Display prediction result
+        st.write(f"Predicted Disease: {prediction[0]}")
 
 # ==========================
-#  FOOTER
+# FOOTER
 # ==========================
 st.markdown("---")
-st.caption("UI version — Model belum diterapkan")
-
-
+st.caption("UI version — Model diterapkan dan siap digunakan.")
