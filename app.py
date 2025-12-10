@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+import sklearn
+import joblib
 
 # ==========================
 # PAGE CONFIG
@@ -79,4 +80,5 @@ with st.container():
 # ==========================
 st.markdown("---")
 st.caption("UI version — Model diterapkan dan siap digunakan.")
+
 
